@@ -33,20 +33,4 @@ public class BoardTestController {
 		mv.setViewName("review_board/board_view2");
 		return mv;
 	}
-	
-	@RequestMapping(value = "/album.do")
-	public ModelAndView albumTest(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView();
-		//mv.addObject("msg", "get");
-		mv.setViewName("album_board/album_list2");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/challenge.do")
-	public ModelAndView challengeTest(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView();
-		//mv.addObject("msg", "get");
-		mv.setViewName("challenge/challenge");
-		return mv;
-	}
 }
