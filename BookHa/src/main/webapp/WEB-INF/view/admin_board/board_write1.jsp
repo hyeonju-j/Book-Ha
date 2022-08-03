@@ -209,8 +209,8 @@
 						class="menu-header-text"></span></li>
 
 					<!-- Tables -->
-					<li class="menu-item"><a href="/admin_list.do"
-						class="menu-link"> <i class='menu-icon bx bx-book-open '
+					<li class="menu-item active"><a href="/admin_list.do"
+						class="menu-link"> <i class='menu-icon bx bx-book-open bx-tada'
 							style='color: #646363'></i> <!-- <i class='menu-icon bx bx-book-open' style='color:#646363'  ></i> -->
 							<div data-i18n="Tables">공지글 관리하기</div>
 					</a></li>

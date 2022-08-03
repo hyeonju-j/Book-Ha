@@ -90,6 +90,7 @@ public class BoardTestController {
 		return mv;
 	}
 	
+	// 공지게시글 확인
 	@RequestMapping(value = "/notice_view.do")
 	public ModelAndView noticeView(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();

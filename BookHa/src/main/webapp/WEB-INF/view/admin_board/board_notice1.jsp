@@ -247,8 +247,8 @@
 						class="menu-header-text">다른 사람들과 책을 나눠봐요!</span></li>
 
 					<!-- Tables -->
-					<li class="menu-item active"><a href="/share_list.do"
-						class="menu-link"> <i class='menu-icon bx bx-gift bx-tada'
+					<li class="menu-item"><a href="/share_list.do"
+						class="menu-link"> <i class='menu-icon bx bx-gift'
 							style='color: #646363'></i> <!-- <i class='menu-icon bx bx-bx-gift bx-tada' style='color:#646363' ></i> -->
 							<div data-i18n="Tables">나눔과 공유하기</div>
 					</a></li>
