@@ -247,8 +247,8 @@
 						class="menu-header-text">다른 사람들과 책을 나눠봐요!</span></li>
 
 					<!-- Tables -->
-					<li class="menu-item active"><a href="/share_list.do"
-						class="menu-link"> <i class='menu-icon bx bx-gift bx-tada'
+					<li class="menu-item"><a href="/share_list.do"
+						class="menu-link"> <i class='menu-icon bx bx-gift'
 							style='color: #646363'></i> <!-- <i class='menu-icon bx bx-bx-gift bx-tada' style='color:#646363' ></i> -->
 							<div data-i18n="Tables">나눔과 공유하기</div>
 					</a></li>
@@ -275,13 +275,6 @@
 					<div class="navbar-nav-right d-flex align-items-center"
 						id="navbar-collapse">
 						<!-- Search -->
-						<div class="navbar-nav align-items-center">
-							<div class="nav-item d-flex align-items-center">
-								<i class="bx bx-search fs-4 lh-0"></i> <input type="text"
-									class="form-control border-0 shadow-none"
-									placeholder="Search..." aria-label="Search..." />
-							</div>
-						</div>
 						<!-- /Search -->
 
 						<ul class="navbar-nav flex-row align-items-center ms-auto">
