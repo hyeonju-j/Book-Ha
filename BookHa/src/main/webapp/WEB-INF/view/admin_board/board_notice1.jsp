@@ -275,13 +275,6 @@
 					<div class="navbar-nav-right d-flex align-items-center"
 						id="navbar-collapse">
 						<!-- Search -->
-						<div class="navbar-nav align-items-center">
-							<div class="nav-item d-flex align-items-center">
-								<i class="bx bx-search fs-4 lh-0"></i> <input type="text"
-									class="form-control border-0 shadow-none"
-									placeholder="Search..." aria-label="Search..." />
-							</div>
-						</div>
 						<!-- /Search -->
 
 						<ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -359,10 +352,15 @@
 							<div id="viewer">
 
 								<h2>게시판 사용시 주의사항 및 규칙 5 (반드시 확인 바랍니다)</h2>
-								<p>공지내용공지내용공지내용공지내용공지내용공지내용</p>
+								<p>공지내용공지내용</p>
+								<p>공지내용공지내용</p>
+								<p>공지내용공지내용</p>
+								<p>공지내용공지내용</p>
+								<p>공지내용공지내용</p>
+								<p>공지내용공지내용</p>
 								
 							</div>
-							<br /><br /><br />
+							<br /><br />
 							
 						</div>
 						<!--/ Hoverable Table rows -->
