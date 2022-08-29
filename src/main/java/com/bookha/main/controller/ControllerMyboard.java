@@ -255,7 +255,7 @@ public class ControllerMyboard {
 	}
 	
 	@RequestMapping(value = "/myreview_list_pageNav.do", method = RequestMethod.POST)
-	public String list_pageNav(@RequestBody DTOReviewTotal to, HttpServletRequest request) {
+	public String list_pageNav(@RequestBody DTOReviewTotal to, HttpServletRequest request, HttpSession session) {
 		
 		String hashTag = to.getHash_tag();
 		
@@ -264,6 +264,11 @@ public class ControllerMyboard {
 		}
 		
 		DTOReviewTotal rto = new DTOReviewTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		rto.setUser_num(user_num);
 		rto.setHash_tag(hashTag);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 		
@@ -322,6 +327,11 @@ public class ControllerMyboard {
 		}
 		
 		DTOShareTotal sto = new DTOShareTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		sto.setUser_num(user_num);
 		sto.setHash_tag(hashTag);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 
@@ -385,7 +395,7 @@ public class ControllerMyboard {
 	}
 	
 	@RequestMapping(value = "/myshare_list_search.do", method = RequestMethod.POST)
-	public String listSearch(@RequestBody DTOShareTotal to, HttpServletRequest request) {
+	public String listSearch(@RequestBody DTOShareTotal to, HttpServletRequest request, HttpSession session) {
 		ArrayList<DTOShareBoard> myshareLists = new ArrayList<DTOShareBoard>();
 		
 		String hashTag = to.getHash_tag();
@@ -395,6 +405,11 @@ public class ControllerMyboard {
 		}
 		
 		DTOShareTotal sto = new DTOShareTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		sto.setUser_num(user_num);
 		sto.setHash_tag(hashTag);
 		int skip, cpage;
 		
@@ -411,7 +426,7 @@ public class ControllerMyboard {
 	}
 	
 	@RequestMapping(value= "myshare_list_pageNav.do", method = RequestMethod.POST)
-	public String listpageNav(@RequestBody DTOShareTotal to, HttpServletRequest request) {
+	public String listpageNav(@RequestBody DTOShareTotal to, HttpServletRequest request, HttpSession session) {
 		
 		String hashTag = to.getHash_tag();
 		
@@ -420,6 +435,11 @@ public class ControllerMyboard {
 		}
 		
 		DTOShareTotal sto = new DTOShareTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		sto.setUser_num(user_num);
 		sto.setHash_tag(hashTag);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 		
