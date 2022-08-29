@@ -29,7 +29,7 @@
         ON
         	r.re_seq = c.re_seq
         WHERE
-			re_num = #{user_num}
+			r.re_num = #{user_num}
         AND
         	r.re_hashtag like CONCAT(#{hash_tag}, '%')
         GROUP BY

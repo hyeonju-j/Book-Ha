@@ -136,7 +136,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: 'POST',
-			url: "/myreview_list_hashTag.do",
+			url: "/myreview_list_search.do",
 			data: JSON.stringify(DTO_Review_Board),
 			contentType: "application/json; charset=UTF-8",
 			dataType: "text",

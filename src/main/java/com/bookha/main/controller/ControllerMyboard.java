@@ -157,6 +157,11 @@ public class ControllerMyboard {
 		}
 		
 		DTOReviewTotal rto = new DTOReviewTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		rto.setUser_num(user_num);
 		rto.setHash_tag(hashTag);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 		
