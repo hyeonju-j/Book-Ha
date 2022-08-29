@@ -45,7 +45,7 @@ public class ControllerMyboard {
 	@Autowired
 	private DAOMyBoard dao;
 
-	@RequestMapping(value = "/myalbum.do")
+	@RequestMapping(value = "/myalbum_list.do")
 	public ModelAndView myalbum(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		//mv.addObject("msg", "get");
