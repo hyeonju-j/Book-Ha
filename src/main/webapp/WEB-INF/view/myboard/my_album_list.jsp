@@ -15,7 +15,6 @@
 	DTOAlbumTotal totalLists = (DTOAlbumTotal)request.getAttribute("totalLists");
 	
 	String albumlist = (String)request.getAttribute("albumlist");
-	System.out.println(albumlist);
 	
 	String nav = (String)request.getAttribute("nav");
 	
