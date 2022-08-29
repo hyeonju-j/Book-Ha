@@ -169,7 +169,7 @@ public class ControllerMyboard {
 		skip = (cpage - 1) * rto.getRecordPerPage();
 		rto.setSkip(skip);
 		
-		rto.setTotalRecord(dao.countMyreview(hashTag));
+		rto.setTotalRecord(dao.countMyreview(rto));
 		totalRecord = rto.getTotalRecord();
 		
 		totalPage = ((totalRecord - 1) / rto.getRecordPerPage()) + 1;
@@ -267,7 +267,7 @@ public class ControllerMyboard {
 		skip = (cpage - 1) * rto.getRecordPerPage();
 		rto.setSkip(skip);
 		
-		rto.setTotalRecord(dao.countMyreview(hashTag));
+		rto.setTotalRecord(dao.countMyreview(rto));
 		totalRecord = rto.getTotalRecord();
 		
 		totalPage = ((totalRecord - 1) / rto.getRecordPerPage()) + 1;
@@ -319,7 +319,7 @@ public class ControllerMyboard {
 		DTOShareTotal sto = new DTOShareTotal();
 		sto.setHash_tag(hashTag);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
-		
+
 		cpage = sto.getCpage();
 		if( request.getParameter("cpage") != null ) {
 			cpage = Integer.parseInt(request.getParameter("cpage"));
@@ -329,7 +329,7 @@ public class ControllerMyboard {
 		skip = (cpage - 1) * sto.getRecordPerPage();
 		sto.setSkip(skip);
 		
-		sto.setTotalRecord(dao.countMyshare(hashTag));
+		sto.setTotalRecord(dao.countMyshare(sto));
 		totalRecord = sto.getTotalRecord();
 		
 		totalPage = ( (totalRecord - 1) / sto.getRecordPerPage() ) + 1;
@@ -422,7 +422,7 @@ public class ControllerMyboard {
 		skip = (cpage - 1) * sto.getRecordPerPage();
 		sto.setSkip(skip);
 		
-		sto.setTotalRecord(dao.countMyshare(hashTag));
+		sto.setTotalRecord(dao.countMyshare(sto));
 		totalRecord = sto.getTotalRecord();
 		
 		totalPage = ( (totalRecord - 1) / sto.getRecordPerPage() ) + 1;
