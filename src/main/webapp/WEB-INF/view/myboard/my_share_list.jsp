@@ -125,7 +125,7 @@
 			
 			$.ajax({
 				type: 'POST',
-				url: "/myshare_list_hashTag.do",
+				url: "/myshare_list_search.do",
 				data: JSON.stringify(DTOShareBoard),
 				contentType: "application/json; charset=UTF-8",
 				dataType: "text",

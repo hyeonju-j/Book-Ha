@@ -254,7 +254,7 @@
 		const viewer = new toastui.Editor.factory({
 			el : document.querySelector('#viewer'),
 			viewer : true,
-			intialValue : '<%= content %>'
+			intialValue : ''
 		});
 		
 		$('boardDelete').on('click', function() {

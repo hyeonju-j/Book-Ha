@@ -81,7 +81,6 @@ public class ModelReviewPageNavigation {
 	public String myPageNav(DTOReviewTotal dto) {
 		String model = "";
 		String hashTag = dto.getHash_tag().replaceAll("#", "%23");
-		String searchSubject = dto.getSearchSubject();
 		
 		// 네비게이션 시작태그
 		model += "<nav aria-label='Page navigation'>";
@@ -134,7 +133,6 @@ public class ModelReviewPageNavigation {
 		model += "<a class='page-link' href='/myreview_list.do";
 		model += "?cpage=" + dto.getTotalPage();
 		model += "&hashtag=" + hashTag;
-		model += "&searchSubject=" + searchSubject;
 		model += "'>";
 		model += "<i class='tf-icon bx bx-chevrons-right'></i></a></li>";
 		

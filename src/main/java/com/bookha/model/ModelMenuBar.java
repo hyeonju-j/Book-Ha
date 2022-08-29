@@ -117,7 +117,7 @@ public class ModelMenuBar {
 		sbHtml.append("<li class='menu-item'><a href='myreview_list.do' class='menu-link'>");
 		sbHtml.append("<div data-i18n='Accordion'>독후감 나누기</div>");
 		sbHtml.append("</a></li>");
-		sbHtml.append("<li class='menu-item'><a href='/myalbum.do' class='menu-link'>");
+		sbHtml.append("<li class='menu-item'><a href='/myalbum_list.do' class='menu-link'>");
 		sbHtml.append("<div data-i18n='Badges'>찔끔 챌린지</div>");
 		sbHtml.append("</a></li>");
 		sbHtml.append("<li class='menu-item'><a href='/myshare_list.do' class='menu-link'>");

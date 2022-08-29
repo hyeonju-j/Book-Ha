@@ -33,9 +33,9 @@ public class DAOMyBoard implements MapperMyBoard {
 	}
 
 	@Override
-	public int countMyshare(String hashTag) {
+	public int countMyshare(DTOShareTotal sto) {
 		// TODO Auto-generated method stub
-		return mapper.countMyshare(hashTag);
+		return mapper.countMyshare(sto);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class DAOMyBoard implements MapperMyBoard {
 	}
 
 	@Override
-	public int countMyreview(String hashTag) {
+	public int countMyreview(DTOReviewTotal rto) {
 		// TODO Auto-generated method stub
-		return mapper.countMyreview(hashTag);
+		return mapper.countMyreview(rto);
 	}
 
 	@Override

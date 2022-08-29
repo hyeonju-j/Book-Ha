@@ -265,7 +265,7 @@ $(document).ready(function() {
 	const viewer = new toastui.Editor.factory({
 		el : document.querySelector('#viewer'),
 		viewer: true,
-		initialValue : '<%= content %>'
+		initialValue : ''
 	});
 	
 	$('#boardDeleteBtn').on('click', function() {

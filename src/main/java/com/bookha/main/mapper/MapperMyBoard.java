@@ -18,11 +18,11 @@ public interface MapperMyBoard {
 
 	ArrayList<DTOShareBoard> myshareList(DTOShareTotal sto);
 	
-	int countMyshare(String hashTag);
+	int countMyshare(DTOShareTotal sto);
 	
 	ArrayList<DTOReviewBoard> myreviewList(DTOReviewTotal rto);
 	
-	int countMyreview(String hashTag);
+	int countMyreview(DTOReviewTotal rto);
 	
 	ArrayList<DTOAlbumBoard> myalbumList(DTOAlbumTotal ato);
 	

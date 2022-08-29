@@ -82,7 +82,6 @@ public class ModelSharePageNavigation {
 	public String myPageNav(DTOShareTotal dto) {
 		String model = "";
 		String hashTag = dto.getHash_tag().replaceAll("#", "%23");
-		String searchSubject = dto.getSearchSubject();
 		
 		// 시작태그
 		model += "<nav aria-label='Page navigation'>";
@@ -117,7 +116,6 @@ public class ModelSharePageNavigation {
 			model += "<a class='page-link' href='/myshare_list.do";
 			model += "?cpage=" + i;
 			model += "&hashtag=" + hashTag;
-			model += "&searchSubject=" + searchSubject;
 			model += "'>" + i + "</a></li>";
 		}
 		
