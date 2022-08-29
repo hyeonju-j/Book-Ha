@@ -15,7 +15,7 @@ public class ModelAlbumList {
 			sbHtml.append("<div class='col'>");
 			sbHtml.append("<div class='card h-100'>");
 			sbHtml.append("<img class='card-img-top'");
-			sbHtml.append("src='http://localhost:8080/images/" + dto.getAl_imgName() +"' alt='Card image cap'>");
+			sbHtml.append("src='/images/" + dto.getAl_imgName() +"' alt='Card image cap'>");
 			sbHtml.append("<div class='card-body'>");
 			
 			sbHtml.append("<div style='display: inline-block; width: 100%;'>");
@@ -38,7 +38,7 @@ public class ModelAlbumList {
 				sbHtml.append("<li><a class='dropdown-item'");
 				sbHtml.append("href='javascript:void(0);' data-bs-toggle='modal'");
 				sbHtml.append("data-bs-target='#modalCenter1' onclick='modifyData(" + dto.getAl_seq() + ", \"" + dto.getAl_subject()+ "\")'>수정</a></li>");
-				sbHtml.append("<li><a class='dropdown-item'");
+				sbHtml.append("<li><a class='dropdown	-item'");
 				sbHtml.append("href='javascript:void(0);' data-bs-toggle='modal'");
 				sbHtml.append("data-bs-target='#modalCenter2' onclick='deleteData(" + dto.getAl_seq() + ")'>삭제</a></li>");
 				sbHtml.append("</ul>");
@@ -66,7 +66,7 @@ public class ModelAlbumList {
 			sbHtml.append("<div class='col'>");
 			sbHtml.append("<div class='card h-100'>");
 			sbHtml.append("<img class='card-img-top'");
-			sbHtml.append("src='http://localhost:8080/images/" + dto.getAl_imgName() +"' alt='Card image cap'>");
+			sbHtml.append("src='/images/" + dto.getAl_imgName() +"' alt='Card image cap'>");
 			sbHtml.append("<div class='card-body'>");
 			
 			sbHtml.append("<div style='display: inline-block; width: 100%;'>");

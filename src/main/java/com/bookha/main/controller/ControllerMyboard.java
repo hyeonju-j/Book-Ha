@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookha.main.dao.DAOMyBoard;
 import com.bookha.main.dao.DAOUser;
+import com.bookha.main.dto.DTOAlbumBoard;
 import com.bookha.main.dto.DTOAlbumTotal;
 import com.bookha.main.dto.DTOReviewBoard;
 import com.bookha.main.dto.DTOReviewTotal;
@@ -95,9 +96,10 @@ public class ControllerMyboard {
 		mv.addObject("userSetting", userSetting);
 		
 		mv.addObject("session_user_num", session_user_num);
-		
+
 		//앨범 게시글 list
 		ModelAlbumList model = new ModelAlbumList();
+		ato.setAl_user_num(session_user_num);
 		String albumlist = model.myAlbumList(dao.myalbumList(ato));
 		mv.addObject("albumlist", albumlist);
 		
@@ -125,7 +127,9 @@ public class ControllerMyboard {
 		userSetting = daoUser.userSetting(session_user_num);
 		
 		//ajax를 통해 수정, 삭제 후 다시 불러 올 앨범의 list 페이지
-		String albumlist = model.myAlbumList(dao.myalbumList(new DTOAlbumTotal()));
+		DTOAlbumTotal ato = new DTOAlbumTotal();
+		ato.setAl_user_num(session_user_num);
+		String albumlist = model.myAlbumList(dao.myalbumList(ato));
 		
 		return albumlist;
 	}
