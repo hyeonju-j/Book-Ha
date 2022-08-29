@@ -40,7 +40,7 @@
         	#{skip}, #{recordPerPage}
     </select>
     
-    <select id="countMyreview" parameterType="String" resultType="int">
+    <select id="countMyreview" parameterType="com.bookha.main.dto.DTOReviewTotal" resultType="int">
 		SELECT
 			count(*)
 		FROM
@@ -48,7 +48,7 @@
 		WHERE
 			re_num = #{user_num}
         AND
-        	re_hashtag like CONCAT(#{hashTag}, '%')
+        	re_hashtag like CONCAT(#{hash_tag}, '%')
 	</select>
 	<!-- /Review -->
 	
@@ -86,7 +86,7 @@
         	#{skip}, #{recordPerPage}
     </select>
     
-    <select id="countMyshare" parameterType="String" resultType="int">
+    <select id="countMyshare" parameterType="com.bookha.main.dto.DTOShareTotal" resultType="int">
     	SELECT
     		count(*)
     	FROM
@@ -94,7 +94,7 @@
     	WHERE
 			sh_num = #{user_num}
         AND
-    		sh_hashtag like CONCAT(#{hashTag}, '%')
+    		sh_hashtag like CONCAT(#{hash_tag}, '%')
     </select>
 	<!-- /Share -->
 	
