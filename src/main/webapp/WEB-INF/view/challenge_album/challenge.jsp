@@ -227,11 +227,10 @@
 				}
 			}
 			
-			const formData = new FormData(); //가상의 form생성(js내부에서 돌아가는 form 객체)
+			//가상의 form생성(js내부에서 돌아가는 form 객체)
+			const formData = new FormData();
 	    	formData.append('image', $('#formFile2')[0].files[0]);
-	    	
-	    	//console.log($('#formFile2')[0].files[0]);
-	    	//console.log(formData);
+
 			
 	    	let url = '/images/';
 			$.ajax({
@@ -245,17 +244,13 @@
 	       		cache: false,
 	       		timeout: 600000,
 	       		success: function(data) {
-	       			//console.log('ajax 이미지 업로드 성공');
 	       			url += data.filename;
-	       			//console.log(url);
-	       			
 	       			let DTO_Album_board = {
 	       					"al_user_num" : <%=session_user_num%>,
 	       					"al_seq" : al_seq,
 	       					"al_subject" : $("#modifySubject").val(),
 	       					"al_imgName" : data.filename
 	       			}
-	       			//console.log(DTO_Album_board);
 	       			$.ajax({
 	       				type: "POST",
 	       				url: "album_modify.do",
@@ -264,7 +259,6 @@
 	       				dataType: "text",
 	       				success: function(data){
 	       					$("#modalCenter1").modal("hide");
-	       					//console.log("DB 추가 성공");
 	       					reload();
 	       					toastr.success('게시글이 수정되었습니다.', '성공!');
 	       				}
@@ -278,7 +272,6 @@
 	let data = 0;
 	const deleteData = function(al_seq){
 		data = al_seq;
-		//console.log("data : "+data)
 	}
 	$(document).ready(function(){
 		$('#delete').on("click", function(){
@@ -286,7 +279,6 @@
 			let DTO_Album_board = {
 					"al_seq" : data
 			}
-			//console.log(DTO_Album_board);
 			$.ajax({
 				type: "POST",
 				url: "album_delete.do",
@@ -295,7 +287,6 @@
 				dataType: "text",
 				success: function(data){
 					$("#modalCenter2").modal("hide");
-					//console.log(data);
 					reload();
 					toastr.success('게시글이 삭제되었습니다.', '성공!');
 				}
