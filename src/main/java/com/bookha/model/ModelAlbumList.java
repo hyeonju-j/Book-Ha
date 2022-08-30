@@ -103,7 +103,6 @@ public class ModelAlbumList {
 			sbHtml.append("</div>");
 			sbHtml.append("</div>");
 		}
-		
 		return sbHtml.toString();
 	}
 }

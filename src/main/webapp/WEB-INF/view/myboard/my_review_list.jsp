@@ -12,9 +12,9 @@
 
 	String navBar = (String)request.getAttribute("navBar");
 	String menuBar =(String)request.getAttribute("menuBar");
+	String nav = (String)request.getAttribute("nav");
 	
 	String reviewTable = (String)request.getAttribute("reviewTable");
-	String nav = (String)request.getAttribute("nav");
 	
 	String hashTag = (String)request.getAttribute("hashTag");
 
@@ -126,7 +126,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$(document).on('click', '.btn-check', function() {
-		//console.log($(this).next().text());
 		
 		let hash_tag = $(this).next().text();
 		
@@ -136,7 +135,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: 'POST',
-			url: "/myreview_list_search.do",
+			url: "/myreview_list_hashTag.do",
 			data: JSON.stringify(DTO_Review_Board),
 			contentType: "application/json; charset=UTF-8",
 			dataType: "text",

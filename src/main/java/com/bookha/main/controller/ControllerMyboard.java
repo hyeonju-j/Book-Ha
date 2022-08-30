@@ -49,7 +49,6 @@ public class ControllerMyboard {
 	@RequestMapping(value = "/myalbum_list.do")
 	public ModelAndView myalbum(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		//mv.addObject("msg", "get");
 		
 		mv.addObject("title", title);
 
@@ -137,7 +136,6 @@ public class ControllerMyboard {
 	@RequestMapping(value = "/myreview_list.do")
 	public ModelAndView myreviewList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		//mv.addObject("msg", "get");
 		
 		mv.addObject("title", title);
 		
@@ -229,7 +227,7 @@ public class ControllerMyboard {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/myreview_list_search.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myreview_list_hashTag.do", method = RequestMethod.POST)
 	public String list_search(@RequestBody DTOReviewTotal to, HttpServletRequest request) {
 		ArrayList<DTOReviewBoard> myreviewLists = new ArrayList<DTOReviewBoard>();
 		
@@ -306,7 +304,6 @@ public class ControllerMyboard {
 	@RequestMapping(value = "/myshare_list.do")
 	public ModelAndView myshareList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		//mv.addObject("msg", "get");
 		
 		mv.addObject("title", title);
 		
@@ -398,7 +395,7 @@ public class ControllerMyboard {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/myshare_list_search.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myshare_list_hashTag.do", method = RequestMethod.POST)
 	public String listSearch(@RequestBody DTOShareTotal to, HttpServletRequest request, HttpSession session) {
 		ArrayList<DTOShareBoard> myshareLists = new ArrayList<DTOShareBoard>();
 		

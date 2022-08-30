@@ -70,7 +70,6 @@ public class ModelReviewList {
 			model+= "<td style='margin: auto; text-align: center;'>" + list.getWdate() + "</td>";
 			model+= "</tr>";
 		}
-		
 		return model;
 	}
 }

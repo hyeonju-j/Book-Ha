@@ -130,19 +130,5 @@
 		WHERE
 			al_user_num = #{al_user_num}
     </select>
-    
-	<delete id="albumDelete" parameterType="int">
-        DELETE
-        FROM
-        	album_board
-    </delete>
 
-    <update id="albumModify" parameterType="com.bookha.main.dto.DTOAlbumBoard">
-        UPDATE
-        	album_board
-        SET
-        	al_subject=#{al_subject},
-        	al_imgName=#{al_imgName}
-    </update>
-	
 </mapper>
