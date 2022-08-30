@@ -12,10 +12,10 @@
 	
 	String navBar = (String)request.getAttribute("navBar");
 	String menuBar =(String)request.getAttribute("menuBar");
+	String paging = (String)request.getAttribute("paging");
 	
 	String listTable = (String)request.getAttribute( "listTable" );
 	
-	String paging = (String)request.getAttribute("paging");
 	String hashTag = (String)request.getAttribute("hashTag");
 
 	String btnradio0 = "";
@@ -111,7 +111,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="../js/toastr.js"></script>
-/*
+
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -125,13 +125,12 @@
 			
 			$.ajax({
 				type: 'POST',
-				url: "/myshare_list_search.do",
+				url: "/myshare_list_hashTag.do",
 				data: JSON.stringify(DTOShareBoard),
 				contentType: "application/json; charset=UTF-8",
 				dataType: "text",
 				success: function(data) {
 					$("#listTable").html(data);
-					//toastr.success('HASH TAG가 [' + hash_tag + '](으)로 변경되었습니다.', '성공!');
 					pageNavigation(hash_tag);
 				}
 			});
@@ -155,7 +154,7 @@
 		});
 	}
 </script>
-*/
+
 </head>
 
 <body>

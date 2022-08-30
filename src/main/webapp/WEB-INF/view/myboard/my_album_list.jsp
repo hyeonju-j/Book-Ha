@@ -13,15 +13,13 @@
 	
 	DTOAlbumBoard dto = (DTOAlbumBoard)request.getAttribute("dto");
 	DTOAlbumTotal totalLists = (DTOAlbumTotal)request.getAttribute("totalLists");
-	
 	String albumlist = (String)request.getAttribute("albumlist");
 	
-	String nav = (String)request.getAttribute("nav");
-	
 	int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+	
+	String nav = (String)request.getAttribute("nav");
 	String navBar = (String)request.getAttribute("navBar");
 	String menuBar =(String)request.getAttribute("menuBar");
-	
 %>
 <!DOCTYPE html>
 
@@ -76,16 +74,7 @@
 
 <!-- Page CSS -->
 <style type="text/css">
-/* .card-img-top { */
-/*  	height:50%;  */
-/* 	object-fit: cover; */
-/* } */
 
-/* #textInfo { */
-/* 	position:absolute;  */
-/* 	bottom:20px; */
-/* 	right:20px; */
-/* } */
 </style>
 <!-- Helpers -->
 <script src="../assets/vendor/js/helpers.js"></script>
@@ -131,7 +120,8 @@ $(document).ready(function(){
 				return false;
 			}
 		}
-		const formData = new FormData(); //가상의 form생성(js내부에서 돌아가는 form 객체)
+		//가상의 form생성(js내부에서 돌아가는 form 객체)
+		const formData = new FormData(); 
     	formData.append('image', $('#formFile2')[0].files[0]);
     	
     	let url = '/images/';
@@ -146,9 +136,7 @@ $(document).ready(function(){
        		cache: false,
        		timeout: 600000,
        		success: function(data) {
-       			//console.log('ajax 이미지 업로드 성공');
        			url += data.filename;
-       			//console.log(url);
        			
        			let DTO_Album_board = {
        					"al_user_num" : <%=session_user_num%>,
@@ -156,7 +144,7 @@ $(document).ready(function(){
        					"al_subject" : $("#modifySubject").val(),
        					"al_imgName" : data.filename
        			}
-       			//console.log(DTO_Album_board);
+       			
        			$.ajax({
        				type: "POST",
        				url: "album_modify.do",
@@ -165,7 +153,6 @@ $(document).ready(function(){
        				dataType: "text",
        				success: function(data){
        					$("#modalCenter1").modal("hide");
-       					//console.log("DB 추가 성공");
        					reload();
        					toastr.success('게시글이 수정되었습니다.', '성공!');
        				}
@@ -179,7 +166,6 @@ $(document).ready(function(){
 let data = 0;
 const deleteData = function(al_seq){
 	data = al_seq;
-	//console.log("data : "+data)
 }
 $(document).ready(function(){
 	$('#delete').on("click", function(){
@@ -187,7 +173,7 @@ $(document).ready(function(){
 		let DTO_Album_board = {
 				"al_seq" : data
 		}
-		//console.log(DTO_Album_board);
+		
 		$.ajax({
 			type: "POST",
 			url: "album_delete.do",
@@ -196,7 +182,6 @@ $(document).ready(function(){
 			dataType: "text",
 			success: function(data){
 				$("#modalCenter2").modal("hide");
-				//console.log(data);
 				reload();
 				toastr.success('게시글이 삭제되었습니다.', '성공!');
 			}
@@ -240,9 +225,7 @@ const reload = function(){
 			<!-- Layout container -->
 			<div class="layout-page" id="albumlayout">
 				<!-- Navbar -->
-
 				<%=navBar %>
-
 				<!-- / Navbar -->
 
 				<!-- Content wrapper -->
@@ -261,14 +244,12 @@ const reload = function(){
 						<div>
 
 							<div class="row row-cols-4 row-cols-md-4 g-4 mb-4" id="albumContents">
-							
-									<%= albumlist %>	
-								
+								<%= albumlist %>	
 							</div>
 							
 							<!-- 페이징 -->
 							<div class="demo-inline-spacing" style="display:flex; justify-content: center;">
-							<%= nav %>
+								<%= nav %>
 							</div>
 							<!-- /페이징 -->
 							

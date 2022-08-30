@@ -38,7 +38,7 @@ public class ModelAlbumList {
 				sbHtml.append("<li><a class='dropdown-item'");
 				sbHtml.append("href='javascript:void(0);' data-bs-toggle='modal'");
 				sbHtml.append("data-bs-target='#modalCenter1' onclick='modifyData(" + dto.getAl_seq() + ", \"" + dto.getAl_subject()+ "\")'>수정</a></li>");
-				sbHtml.append("<li><a class='dropdown	-item'");
+				sbHtml.append("<li><a class='dropdown-item'");
 				sbHtml.append("href='javascript:void(0);' data-bs-toggle='modal'");
 				sbHtml.append("data-bs-target='#modalCenter2' onclick='deleteData(" + dto.getAl_seq() + ")'>삭제</a></li>");
 				sbHtml.append("</ul>");
@@ -103,7 +103,6 @@ public class ModelAlbumList {
 			sbHtml.append("</div>");
 			sbHtml.append("</div>");
 		}
-		
 		return sbHtml.toString();
 	}
 }
