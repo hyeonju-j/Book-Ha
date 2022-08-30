@@ -37,9 +37,7 @@ public class FilterUrlInterceptor implements HandlerInterceptor {
 		    	this.session_user_num = (int)session.getAttribute("user_num");
 		    }
 	    }
-	    
-//	    logger.info("[preHandle] [value] login : " + this.login);
-//	    logger.info("[preHandle] [value] user_num : " + this.session_user_num);
+
 	    if(this.login == false) {
 			response.sendRedirect("/login");
 			return false;

@@ -143,7 +143,6 @@
 		
 		$("#search").on("click", () => {
 			$("#kakao_bookSearch_result").html("");
-			//console.log($("#query").val());
 			
 			if($("#query").val()=='') {
 				return false;	
@@ -153,14 +152,10 @@
 			    method: "GET",
 			    url: "https://dapi.kakao.com/v3/search/book?target=title",
 			    data: { query: $("#query").val(), page: pageNum},
-			    headers: {Authorization: "KakaoAK 4169af87ec57642db130af59093e6bbc"} // ########부분에 본인의 REST API 키를 넣어주세요.
+			    headers: {Authorization: "KakaoAK 4169af87ec57642db130af59093e6bbc"}
 			
 			})
 			.done((msg) => {
-			    //console.log(msg);
-			    //console.log("검색 문서 수 : "+msg.meta.total_count);
-			    //console.log("중복문서 제외 노출 문서 수 : "+msg.meta.pageable_count);
-			 	//console.log("현재 페이지가 마지막 페이지인지? : "+msg.meta.is_end);
 			 	
 			book_search_is_end = msg.meta.is_end;
 			

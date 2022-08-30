@@ -117,7 +117,8 @@ String logo = (String) request.getAttribute("logo");
 	    
 	    //휴대폰 번호 정규식 검사
 		$("#userPhone").keyup(function(){
-			phoneNo()
+			$("#userPhone").val( $("#userPhone").val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replaceAll("--", "-") );
+			
       		var text = $("#userPhone").val().trim();
 
       		var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;

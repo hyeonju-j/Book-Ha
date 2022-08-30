@@ -181,73 +181,66 @@ String logo = (String) request.getAttribute("logo");
 		Kakao.init("f0e137541dcef23154b82f7c348b087a");
 		
 		function kakaoLogin() {
-			
-// 			// 카카오 로그인 토큰 호출
-// 			if (!Kakao.Auth.getAccessToken()) {
-				Kakao.Auth.loginForm({
-					success : function(result) {
-						Kakao.Auth.setAccessToken(result.access_token);
-						Kakao.API.request({
-							url: '/v2/user/me',
-							success: function(res) {
-								let email = res.kakao_account.email;
-								let name = res.kakao_account.profile.nickname;
-								
-								let DTOUser = {
-										"user_mail": email,
-										"user_name": name
-								}
-								
-								$.ajax({
-									type: 'POST',
-									url: "/kakaoUser/kakao_user_check",
-									data: JSON.stringify(DTOUser),
-									contentType: "application/json; charset=UTF-8",
-									dataType: "text",
-									success: function(result) {
-										if(result == "1") {
-											window.location.href = "/login/mainpage";
-										} else {
-											let f = document.createElement('form');
-											
-											let obj1;
-											obj1 = document.createElement('input');
-											obj1.setAttribute('type', 'hidden');
-											obj1.setAttribute('name', 'email');
-											obj1.setAttribute('value', email);
-											
-											let obj2;
-											obj2 = document.createElement('input');
-											obj2.setAttribute('type', 'hidden');
-											obj2.setAttribute('name', 'name');
-											obj2.setAttribute('value', name);
-											
-											f.appendChild(obj1);
-											f.appendChild(obj2);
-											
-											f.setAttribute('method', 'post');
-											f.setAttribute('action', '/kakaoUser/kakao_add');
-											document.body.appendChild(f);
-											f.submit();
-										}
-									}
-								});
-							},
-							fail: function(error) {
-								console.log(error);
-								toastr.error("Kakao에서 값을 불러오지 못했습니다.", "연결 오류!");
+			Kakao.Auth.loginForm({
+				success : function(result) {
+					Kakao.Auth.setAccessToken(result.access_token);
+					Kakao.API.request({
+						url: '/v2/user/me',
+						success: function(res) {
+							let email = res.kakao_account.email;
+							let name = res.kakao_account.profile.nickname;
+							
+							let DTOUser = {
+									"user_mail": email,
+									"user_name": name
 							}
-			    		});
-					},
-					fail : function(err) {
-						console.log(JSON.stringify(err));
-						toastr.error("Kakao와 연결을 실패하였습니다.", "연결 오류!");
-					}
-				});
-// 			} else {
-// 				console.log(Kakao.isInitialized());
-// 				return;
-// 			}
+							
+							$.ajax({
+								type: 'POST',
+								url: "/kakaoUser/kakao_user_check",
+								data: JSON.stringify(DTOUser),
+								contentType: "application/json; charset=UTF-8",
+								dataType: "text",
+								success: function(result) {
+									if(result == "1") {
+										window.location.href = "/login/mainpage";
+									} else {
+										let f = document.createElement('form');
+										
+										let obj1;
+										obj1 = document.createElement('input');
+										obj1.setAttribute('type', 'hidden');
+										obj1.setAttribute('name', 'email');
+										obj1.setAttribute('value', email);
+										
+										let obj2;
+										obj2 = document.createElement('input');
+										obj2.setAttribute('type', 'hidden');
+										obj2.setAttribute('name', 'name');
+										obj2.setAttribute('value', name);
+										
+										f.appendChild(obj1);
+										f.appendChild(obj2);
+										
+										f.setAttribute('method', 'post');
+										f.setAttribute('action', '/kakaoUser/kakao_add');
+										document.body.appendChild(f);
+										f.submit();
+									}
+								}
+							});
+						},
+						fail: function(error) {
+							console.log(error);
+							toastr.error("Kakao에서 값을 불러오지 못했습니다.", "연결 오류!");
+						}
+		    		});
+				},
+				fail : function(err) {
+					console.log(JSON.stringify(err));
+					toastr.error("Kakao와 연결을 실패하였습니다.", "연결 오류!");
+				}
+			});
 		}
 	</script>
 

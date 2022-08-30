@@ -13,9 +13,7 @@ public class ControllerUrlInterceptor implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		// TODO Auto-generated method stub
 		registry.addInterceptor(new FilterUrlInterceptor())
-		// 모든 경로에 인터셉터가 가로채 필터처리할 예정.
 		.addPathPatterns("/*")
-        // 해당 경로는 인터셉터가 가로채지 않는다.
 		.excludePathPatterns("/assets/*")
 		.excludePathPatterns("/css/*")
 		.excludePathPatterns("/fonts/*")
