@@ -26,6 +26,6 @@ public interface MapperMyBoard {
 	
 	ArrayList<DTOAlbumBoard> myalbumList(DTOAlbumTotal ato);
 	
-	int countMyalbum();
+	int countMyalbum(DTOAlbumTotal ato);
 	
 }

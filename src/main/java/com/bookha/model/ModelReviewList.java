@@ -53,7 +53,7 @@ public class ModelReviewList {
 			} else {
 				model+= "<span class='badge bg-info rounded-pill' style='visibility: hidden;'>New</span>&nbsp;&nbsp;";
 			}
-			model+= "<a href='./review_view.do?seq=" + list.getSeq() + "' style='color: gray'> <strong>[책 리뷰]&nbsp;&nbsp;</strong>" + list.getSubject() + "</a> &nbsp;&nbsp;";
+			model+= "<a href='./myreview_view.do?seq=" + list.getSeq() + "' style='color: gray'> <strong>[책 리뷰]&nbsp;&nbsp;</strong>" + list.getSubject() + "</a> &nbsp;&nbsp;";
 			model+= "<span class='badge rounded-pill badge-center h-px-20 w-px-20 bg-danger'>" + list.getCmt_cnt() + "</span>";
 			model+= "</td>";
 			model+= "<td>";

@@ -57,9 +57,9 @@ public class DAOMyBoard implements MapperMyBoard {
 	}
 
 	@Override
-	public int countMyalbum() {
+	public int countMyalbum(DTOAlbumTotal ato) {
 		// TODO Auto-generated method stub
-		return mapper.countMyalbum();
+		return mapper.countMyalbum(ato);
 	}
 
 }

@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bookha.main.dao.DAOMyBoard;
+import com.bookha.main.dao.DAOReviewBoard;
+import com.bookha.main.dao.DAOShareBoard;
 import com.bookha.main.dao.DAOUser;
 import com.bookha.main.dto.DTOAlbumBoard;
 import com.bookha.main.dto.DTOAlbumTotal;
 import com.bookha.main.dto.DTOReviewBoard;
+import com.bookha.main.dto.DTOReviewComment;
 import com.bookha.main.dto.DTOReviewTotal;
 import com.bookha.main.dto.DTOShareBoard;
+import com.bookha.main.dto.DTOShareComment;
 import com.bookha.main.dto.DTOShareTotal;
 import com.bookha.main.dto.DTOUser;
 import com.bookha.model.ModelAlbumList;
@@ -29,8 +33,10 @@ import com.bookha.model.ModelLogoHtml;
 import com.bookha.model.ModelMenuBar;
 import com.bookha.model.ModelNavBar;
 import com.bookha.model.ModelProfileHtml;
+import com.bookha.model.ModelReviewCommentList;
 import com.bookha.model.ModelReviewList;
 import com.bookha.model.ModelReviewPageNavigation;
+import com.bookha.model.ModelShareCmt;
 import com.bookha.model.ModelShareList;
 import com.bookha.model.ModelSharePageNavigation;
 
@@ -45,7 +51,13 @@ public class ControllerMyboard {
 
 	@Autowired
 	private DAOMyBoard dao;
-
+	
+	@Autowired
+	private DAOShareBoard daoShare;
+	
+	@Autowired
+	private DAOReviewBoard daoReview;
+	
 	@RequestMapping(value = "/myalbum_list.do")
 	public ModelAndView myalbum(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -57,6 +69,11 @@ public class ControllerMyboard {
 
 		// 페이징 처리
 		DTOAlbumTotal ato = new DTOAlbumTotal();
+		int user_num = 0;
+		if(session.getAttribute("user_num") != null) {
+			user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		}
+		ato.setAl_user_num(user_num);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 		
 		cpage = ato.getCpage();
@@ -68,7 +85,7 @@ public class ControllerMyboard {
 		skip = (cpage - 1) * ato.getRecordPerPage();
 		ato.setSkip(skip);
 		
-		ato.setTotalRecord(dao.countMyalbum());
+		ato.setTotalRecord(dao.countMyalbum(ato));
 		totalRecord = ato.getTotalRecord();
 		
 		totalPage = ((totalRecord - 1) / ato.getRecordPerPage()) + 1;
@@ -84,26 +101,21 @@ public class ControllerMyboard {
 		}
 		ato.setEndBlock(endBlock);
 		
+		// paging
 		ModelAlbumPageNavigation pageModel = new ModelAlbumPageNavigation();
+		ato.setAl_user_num(user_num);
 		String nav = pageModel.myPageNav(ato);
 		mv.addObject("nav", nav);
 		
-		//로그인 한 회원의 정보
-		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
-		DTOUser userSetting = new DTOUser();
-		userSetting = daoUser.userSetting(session_user_num);
-		mv.addObject("userSetting", userSetting);
-		
-		mv.addObject("session_user_num", session_user_num);
-
 		//앨범 게시글 list
 		ModelAlbumList model = new ModelAlbumList();
-		ato.setAl_user_num(session_user_num);
 		String albumlist = model.myAlbumList(dao.myalbumList(ato));
 		mv.addObject("albumlist", albumlist);
 		
-		//Navbar Model
+		// 상단 Navbar Model
 		ModelNavBar navModel = new ModelNavBar();
+		DTOUser userSetting = new DTOUser();
+		userSetting = daoUser.userSetting(user_num);
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
 		
@@ -202,6 +214,7 @@ public class ControllerMyboard {
 		
 		// paging model
 		ModelReviewPageNavigation pageModel = new ModelReviewPageNavigation();
+		rto.setUser_num(user_num);
 		String nav = pageModel.myPageNav(rto);
 		mv.addObject("nav", nav);
 		
@@ -297,8 +310,161 @@ public class ControllerMyboard {
 		
 		ModelReviewPageNavigation navModel = new ModelReviewPageNavigation();
 		String nav = navModel.myPageNav(rto);
+		System.out.println( rto.getTotalPage() );
 		
 		return nav;
+	}
+	
+	@RequestMapping(value = "/myreview_view.do")
+	public ModelAndView reviewView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		mv.addObject("title", title);
+		
+		ModelLogoHtml logo = new ModelLogoHtml();
+		mv.addObject("logo", logo.getLogo().toString());
+		
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		mv.addObject("session_user_num", session_user_num);
+		
+		daoReview.viewHit(seq);
+		DTOReviewBoard to = daoReview.view(seq);
+		mv.addObject("to", to);
+		
+		DTOUser userSetting = new DTOUser();
+		userSetting = daoUser.userSetting(to.getUser_num());
+		mv.addObject("user", userSetting);
+		
+		//상단 Navbar Model
+		ModelNavBar navModel = new ModelNavBar();
+		String navBar = navModel.navBar(userSetting);
+		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.userMenuBar("myPost");
+		mv.addObject("menuBar", menuBar);
+		
+		ModelProfileHtml profile = new ModelProfileHtml();
+		if(this.user_role.equals("user")) {
+			mv.addObject("profile", profile.getProfile().toString());
+		} else if(this.user_role.equals("admin")) {
+			mv.addObject("profile", profile.getAdminProfile().toString());
+		}
+		
+		ArrayList<DTOReviewComment> com_lists = daoReview.commentList(seq);
+		ModelReviewCommentList comment = new ModelReviewCommentList();
+		String commentHtml = comment.getCommentList(com_lists, session_user_num, this.user_role);
+		mv.addObject("comment", commentHtml);
+		
+		mv.setViewName("myboard/myreview_view");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myreview_modify.do")
+	public ModelAndView reviewModify(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		mv.addObject("title", title);
+		
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		mv.addObject("session_user_num", session_user_num);
+		
+		ModelProfileHtml profile = new ModelProfileHtml();
+		if(this.user_role.equals("user")) {
+			mv.addObject("profile", profile.getProfile().toString());
+		} else if(this.user_role.equals("admin")) {
+			mv.addObject("profile", profile.getAdminProfile().toString());
+		}
+		
+		ModelLogoHtml logo = new ModelLogoHtml();
+		mv.addObject("logo", logo.getLogo().toString());
+		
+		//상단 Navbar Model
+		DTOUser userSetting = new DTOUser();
+		userSetting = daoUser.userSetting(session_user_num);
+		ModelNavBar navModel = new ModelNavBar();
+		String navBar = navModel.navBar(userSetting);
+		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.userMenuBar("myPost");
+		mv.addObject("menuBar", menuBar);
+		mv.setViewName("review_board/board_list");
+		
+		DTOReviewBoard to = daoReview.modify(seq);
+		to.setUser_num(session_user_num);
+		mv.addObject("to", to);
+		
+		mv.setViewName("myboard/myreview_modify");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myreview_modify_ok.do")
+	public ModelAndView reivewModifyOk(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+
+		String subject = request.getParameter("subject");
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		String content = request.getParameter("content");
+		String hash_tag = request.getParameter("hash_tag");
+		String book_img_url = request.getParameter("book_img_url");
+		String book_info_url = request.getParameter("book_info_url");
+		String book_title = request.getParameter("book_title");
+		String book_author = request.getParameter("book_author");
+		String book_publisher = request.getParameter("book_publisher");
+		String book_summary = request.getParameter("book_summary");
+		
+		DTOReviewBoard to = new DTOReviewBoard();
+		
+		to.setSeq(seq);
+		to.setSubject(subject);
+		to.setUser_num(session_user_num);
+		to.setContent(content);
+		to.setHash_tag(hash_tag);
+		to.setBook_img_url(book_img_url);
+		to.setBook_info_url(book_info_url);
+		to.setBook_title(book_title);
+		to.setBook_author(book_author);
+		to.setBook_publisher(book_publisher);
+		to.setBook_summary(book_summary);
+
+		int flag = daoReview.modifyOk(to);
+		
+		mv.addObject("flag", flag);
+		mv.addObject("seq", seq);
+		
+		mv.setViewName("myboard/myreview_update_ok");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myreview_delete.do")
+	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		String url = "success";
+		
+		DTOReviewBoard to = new DTOReviewBoard();
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		to.setSeq(seq);
+		to.setUser_num(session_user_num);
+		
+		int flag = daoReview.deleteOk(to);
+		
+		mv.addObject("flag", flag);
+		
+		mv.setViewName("myboard/myreview_update_ok");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/myshare_list.do")
@@ -470,4 +636,142 @@ public class ControllerMyboard {
 		return paging;
 	}
 	
+	@RequestMapping(value = "/myshare_view.do")
+	public ModelAndView shareView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		mv.addObject("title", title);
+		
+		ModelLogoHtml logo = new ModelLogoHtml();
+		mv.addObject("logo", logo.getLogo().toString());
+		
+		int seq = Integer.parseInt(request.getParameter("seq"));
+
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		mv.addObject("session_user_num", session_user_num);
+		
+		daoShare.viewHit(seq);
+		DTOShareBoard to = daoShare.view(seq);
+		mv.addObject("to", to);
+
+		//상단 Navbar Model
+		DTOUser userSetting = new DTOUser();
+		userSetting = daoUser.userSetting(session_user_num);
+		mv.addObject("user", userSetting);
+		
+		ModelNavBar navModel = new ModelNavBar();
+		String navBar = navModel.navBar(userSetting);
+		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.userMenuBar("myPost");
+		mv.addObject("menuBar", menuBar);
+		
+		ModelProfileHtml profile = new ModelProfileHtml();
+		if(this.user_role.equals("user")) {
+			mv.addObject("profile", profile.getProfile().toString());
+		} else if(this.user_role.equals("admin")) {
+			mv.addObject("profile", profile.getAdminProfile().toString());
+		}
+		
+		// 댓글
+		ArrayList<DTOShareComment> comment_lists = daoShare.commentList(seq);
+		ModelShareCmt comment = new ModelShareCmt();
+		String cmtTable = comment.cmtList(comment_lists, session_user_num, this.user_role);
+		mv.addObject("cmtTable", cmtTable);
+
+		mv.setViewName("myboard/myshare_view");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myshare_modify.do")
+	public ModelAndView shareModify(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		mv.addObject("title", title);
+		
+		ModelLogoHtml logo = new ModelLogoHtml();
+		mv.addObject("logo", logo.getLogo().toString());
+		
+		int seq = Integer.parseInt( request.getParameter( "seq" ) );
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		mv.addObject("session_user_num", session_user_num);
+		
+		ModelProfileHtml profile = new ModelProfileHtml();
+		if(this.user_role.equals("user")) {
+			mv.addObject("profile", profile.getProfile().toString());
+		} else if(this.user_role.equals("admin")) {
+			mv.addObject("profile", profile.getAdminProfile().toString());
+		}
+		
+		//상단 Navbar Model
+		DTOUser userSetting = new DTOUser();
+		userSetting = daoUser.userSetting(session_user_num);
+		ModelNavBar navModel = new ModelNavBar();
+		String navBar = navModel.navBar(userSetting);
+		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.userMenuBar("myPost");
+		mv.addObject("menuBar", menuBar);
+		
+		DTOShareBoard to = daoShare.modify(seq);
+		to.setUser_num(session_user_num);
+		mv.addObject("to", to);
+		
+		mv.setViewName("myboard/myshare_modify");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myshare_modify_ok.do")
+	public ModelAndView shareModifyOk(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+
+		String subject = request.getParameter("subject");
+		int seq = Integer.parseInt( request.getParameter( "seq" ) );
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num"))); 
+		String content = request.getParameter("content");
+		String hash_tag = request.getParameter("hash_tag");
+				
+		DTOShareBoard to = new DTOShareBoard();
+		
+		to.setSeq(seq);
+		to.setSubject(subject);
+		to.setUser_num(session_user_num);
+		to.setContent(content);
+		to.setHash_tag(hash_tag);
+
+		int flag = daoShare.modifyOk(to);
+		
+		mv.addObject("flag", flag);
+		mv.addObject("seq", seq);
+		
+		mv.setViewName("myboard/myshare_update_ok");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/myshare_delete_ok.do")
+	public ModelAndView shareDeleteOk(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+
+		String url = "success";
+		
+		DTOShareBoard to = new DTOShareBoard();
+		int seq = Integer.parseInt( request.getParameter( "seq" ) );
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		to.setSeq(seq);
+		to.setUser_num(session_user_num);
+
+		int flag = daoShare.deleteOk(to);
+		mv.addObject("flag", flag);
+		
+		mv.setViewName("myboard/myshare_update_ok");
+		return mv;
+	}
 }
