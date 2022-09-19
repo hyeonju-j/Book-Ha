@@ -195,7 +195,7 @@
 			previewHighlight: false,
 			height: '700px',
 			// 사전입력 항목
-			initialValue: '# 안녕하세요. 제목입니다.\n### 사전입력 테스트\n본문본문본문\n\n',
+			initialValue: '',
 			// 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
 			hooks: {
 				addImageBlobHook: (blob, callback) => {

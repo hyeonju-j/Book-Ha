@@ -36,6 +36,6 @@
 
 <script>
 	$(document).ready(function() {
-		toastr.succeses('MariaDB를 업데이트했습니다.', '성공!');
+		toastr.succeses('업데이트했습니다.', '성공!');
 	};
 </script>

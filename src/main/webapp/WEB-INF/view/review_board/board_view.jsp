@@ -418,7 +418,7 @@ const reload = function(board_seq) {
 
 							<!-- TOAST UI Editor가 들어갈 div태그 -->
 							<div id="viewer">
-								
+								<%=content %>
 							</div>
 
 							<div class="list-group" id="profile_group">

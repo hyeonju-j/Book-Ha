@@ -38,7 +38,7 @@
 <script>
 $(document).ready(function() {
 	
-	toastr.success('MariaDB를 업데이트했습니다.', '성공!');
+	toastr.success('업데이트했습니다.', '성공!');
 	
 };
 </script>
