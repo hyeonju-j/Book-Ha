@@ -12,8 +12,7 @@
 	String profile = (String) request.getAttribute("profile");
 	String logo = (String) request.getAttribute("logo");
 	String navBar = (String)request.getAttribute("navBar");
-	
-	
+	String menuBar =(String)request.getAttribute("menuBar");
 	
 	int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
 %>
@@ -321,49 +320,9 @@
 				</div>
 
 				<div class="menu-inner-shadow"></div>
-
-				<ul class="menu-inner py-1">
-
-					<!-- Forms & Tables -->
-					<li class="menu-header small text-uppercase"><span
-						class="menu-header-text"></span></li>
-
-					<!-- Tables -->
-					<li class="menu-item"><a href="/list.do"
-						class="menu-link"> <i class='menu-icon bx bx-book-open '
-							style='color: #646363'></i> <!-- <i class='menu-icon bx bx-book-open' style='color:#646363'  ></i> -->
-							<div data-i18n="Tables">공지글 관리하기</div>
-					</a></li>
-
-					<!-- Forms & Tables -->
-					<li class="menu-header small text-uppercase"><span
-						class="menu-header-text"></span></li>
-
-					<!-- Tables -->
-					<li class="menu-item" style=""><a href="javascript:void(0)"
-						class="menu-link menu-toggle"> <i
-							class="menu-icon tf-icons bx bx-box"></i>
-							<div data-i18n="User interface">게시판 이동하기</div>
-					</a>
-						<ul class="menu-sub">
-							<li class="menu-item"><a href="/ranking.do" class="menu-link">
-									<div data-i18n="Alerts">업적과 순위</div>
-							</a></li>
-							<li class="menu-item"><a href="/review_list.do"
-								class="menu-link">
-									<div data-i18n="Accordion">독후감 나누기</div>
-							</a></li>
-							<li class="menu-item"><a href="/album_list.do" class="menu-link">
-									<div data-i18n="Badges">찔끔 챌린지</div>
-							</a></li>
-							<li class="menu-item"><a href="/share_list.do"
-								class="menu-link">
-									<div data-i18n="Buttons">나눔과 공유하기</div>
-							</a></li>
-						</ul></li>
-
-
-				</ul>
+ 				<!-- menuBar Model -->
+				<%=menuBar %>
+				<!-- / menuBar Model -->
 			</aside>
 			<!-- / Menu -->
 
