@@ -10,6 +10,9 @@ public class DTOAdminBoard {
 	private String content;
 	private String wdate;
 	private String wgap;
-	private String user_nickname;
 	private int rowno;
+	private String user_nickname;
+	private String user_mail;
+	private String user_name;
+	private String user_phonenumber;
 }

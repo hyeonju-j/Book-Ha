@@ -32,5 +32,34 @@ public class ModelAdminList {
 		}
 		return table;
 	}
+	
+	public String memberList(ArrayList<DTOAdminBoard> memberLists) {
+		
+		String table = "";
+		for( DTOAdminBoard dto : memberLists) {
+			table += "<tr>";
+			table += "<td>";
+			table += "<i class='fab fa-angular fa-lg text-danger me-2'></i>";
+			if(dto.getWgap().equals("0")) {
+				table += "<span class='badge bg-info rounded-pill'>New</span>&nbsp;" + dto.getRowno();
+			} else {
+				table += "<span class='badge bg-info rounded-pill' style='visibility: hidden;'>New</span>&nbsp;" + dto.getRowno();
+			}
+			table += "</td>";
+			table += "<td style='margin: auto; text-align: center;'>&nbsp;&nbsp;" + dto.getUser_nickname() + "</td>";
+			table += "<td style='margin: auto; text-align: center;'>&nbsp;&nbsp;" + dto.getUser_name() + "</td>";
+			table += "<td style='margin: auto; text-align: center;'>&nbsp;&nbsp;" + dto.getUser_mail() + "</td>";
+			table += "<td style='margin: auto; text-align: center;'>&nbsp;&nbsp;" + dto.getUser_phonenumber() + "</td>";
+			table += "<td style='margin: auto; text-align: center;'>&nbsp;&nbsp;" + dto.getWdate() + "</td>";
+			table += "<td style='margin: auto; text-align: center;'>";
+			table += "<a href='javascript:void(0);' data-bs-toggle='modal'";
+			table += "data-bs-target='#modalCenter2' onclick='deleteData(" + dto.getUser_num() + ")'>";
+			table += "<i class='bx bxs-trash'></i></a>";
+			table += "</td>";
+			table += "</tr>";
+			
+		}
+		return table;
+	}
 
 }

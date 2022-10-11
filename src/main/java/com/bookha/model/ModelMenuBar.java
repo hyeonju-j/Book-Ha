@@ -171,6 +171,22 @@ public class ModelMenuBar {
 		sbHtml.append("<li class='menu-header small text-uppercase'><spanclass='menu-header-text'></span></li>");
 		sbHtml.append("<!-- Tables -->");
 		sbHtml.append("<li class='menu-item");
+		if (page.equals("member")) {
+			sbHtml.append(" active");
+		}
+		sbHtml.append("'><a href='/memberList.do' class='menu-link'>");
+		sbHtml.append("<i class='menu-icon bx bx-book-open");
+		if (page.equals("member")) {
+			sbHtml.append(" bx-tada");
+		}
+		sbHtml.append("' style='color: #646363'></i> ");
+		sbHtml.append("<div data-i18n='Tables'>회원 관리하기</div>");
+		sbHtml.append("</a></li>");
+		
+		sbHtml.append("<!-- Forms & Tables -->");
+		sbHtml.append("<li class='menu-header small text-uppercase'><spanclass='menu-header-text'></span></li>");
+		sbHtml.append("<!-- Tables -->");
+		sbHtml.append("<li class='menu-item");
 		if (page.equals("adminBoard")) {
 			sbHtml.append(" active");
 		}

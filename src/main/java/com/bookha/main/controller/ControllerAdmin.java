@@ -22,6 +22,7 @@ import com.bookha.main.dto.DTOUser;
 import com.bookha.model.ModelAdminList;
 import com.bookha.model.ModelAdminPageNavigation;
 import com.bookha.model.ModelLogoHtml;
+import com.bookha.model.ModelMenuBar;
 import com.bookha.model.ModelNavBar;
 import com.bookha.model.ModelProfileHtml;
 
@@ -91,7 +92,7 @@ public class ControllerAdmin {
 			endBlock = totalPage;
 		}
 		dto.setEndBlock(endBlock);
-		
+
 		// list
 		ArrayList<DTOAdminBoard> lists = new ArrayList<DTOAdminBoard>();
 		lists = dao.list(dto);
@@ -112,6 +113,11 @@ public class ControllerAdmin {
 		ModelNavBar navModel = new ModelNavBar();
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("adminPost");
+		mv.addObject("menuBar", menuBar);
 		
 		mv.setViewName("admin_board/board_list");
 		return mv;
@@ -142,6 +148,11 @@ public class ControllerAdmin {
 		ModelNavBar navModel = new ModelNavBar();
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("");
+		mv.addObject("menuBar", menuBar);
 
 		String auth = userSetting.getUser_role();
 		if( !auth.equals("admin") ) {
@@ -179,6 +190,11 @@ public class ControllerAdmin {
 		ModelNavBar navModel = new ModelNavBar();
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("adminPost");
+		mv.addObject("menuBar", menuBar);
 		
 		String auth = userSetting.getUser_role();
 		if( !auth.equals("admin") ) {
@@ -253,6 +269,11 @@ public class ControllerAdmin {
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
 		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("adminPost");
+		mv.addObject("menuBar", menuBar);
+		
 		mv.setViewName("admin_board/board_view");
 		return mv;
 	}
@@ -289,6 +310,11 @@ public class ControllerAdmin {
 		ModelNavBar navModel = new ModelNavBar();
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("adminPost");
+		mv.addObject("menuBar", menuBar);
 		
 		mv.setViewName("admin_board/board_modify");
 		return mv;
@@ -356,6 +382,11 @@ public class ControllerAdmin {
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);
 		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.menuBar("");
+		mv.addObject("menuBar", menuBar);
+		
 		// view
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		//int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
@@ -376,6 +407,100 @@ public class ControllerAdmin {
 		mv.setViewName("admin_board/board_notice");
 		return mv;
 	}
+	
+	@RequestMapping(value = "/memberList.do")
+	public ModelAndView memberList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("msg", "get");
+		
+		// 타이틀
+		mv.addObject("title", title);
+		
+		// 프로필
+		ModelProfileHtml profile = new ModelProfileHtml();
+		if(this.user_role.equals("user")) {
+			mv.addObject("profile", profile.getProfile().toString());
+		} else if(this.user_role.equals("admin")) {
+			mv.addObject("profile", profile.getAdminProfile().toString());
+		}
+		
+		// 로고
+		ModelLogoHtml logo = new ModelLogoHtml();
+		mv.addObject("logo", logo.getLogo().toString());
+		
+		// 페이지
+		DTOAdminTotal dto = new DTOAdminTotal();
+		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
+		
+		// 현재 페이지
+		cpage = dto.getCpage();
+		if( request.getParameter("cpage") != null ) {
+			cpage = Integer.parseInt(request.getParameter("cpage"));
+			dto.setCpage(cpage);
+		}
+			
+		// 게시글 시작 번호
+		skip = (cpage - 1) * dto.getRecordPerPage();
+		dto.setSkip(skip);
+				
+		// 총 게시글 수
+		dto.setTotalRecord(dao.countMember());
+		totalRecord = dto.getTotalRecord();
+		
+		// 전체 페이지 수
+		totalPage = ( (totalRecord - 1) / dto.getRecordPerPage() ) + 1;
+		dto.setTotalPage(totalPage);
+				
+		// 보여질 블록 수 5개
+		blockPerPage = dto.getBlockPerPage();
+				
+		// 블록 시작,끝
+		startBlock = ( ( (cpage - 1) / blockPerPage ) * blockPerPage ) + 1;
+		dto.setStartBlock(startBlock);
+		endBlock = ( ( (cpage - 1) / blockPerPage ) * blockPerPage ) + blockPerPage;
+		if(endBlock >= totalPage) {
+			endBlock = totalPage;
+		}
+		dto.setEndBlock(endBlock);
+
+		// list
+		ArrayList<DTOAdminBoard> memberLists = new ArrayList<DTOAdminBoard>();
+		memberLists = dao.memberList(dto);
+		
+		ModelAdminList ad = new ModelAdminList();
+		String memberList = ad.memberList(memberLists);
+		mv.addObject("memberList", memberList);
+		
+		// 페이지
+		ModelAdminPageNavigation pageModel = new ModelAdminPageNavigation();
+		String paging = pageModel.getmPage(dto);
+		mv.addObject("paging", paging);
+
+		//Navbar Model
+		DTOUser userSetting = new DTOUser();
+		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
+		userSetting = daoUser.userSetting(session_user_num);
+		ModelNavBar navModel = new ModelNavBar();
+		String navBar = navModel.navBar(userSetting);
+		mv.addObject("navBar", navBar);
+		
+		//좌측 Menu Model
+		ModelMenuBar menuModel = new ModelMenuBar();
+		String menuBar = menuModel.adminMenuBar("member");
+		mv.addObject("menuBar", menuBar);
+		
+		mv.setViewName("admin_board/board_member");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/member_delete.do", method = RequestMethod.POST)
+	public String deleteData(@RequestBody DTOUser uto, HttpSession session) {
+		
+		dao.memberDelete(uto.getUser_num());
+		
+		return "";
+	}
+	
 	
 	// chart
 	@RequestMapping(value = "/getdaily.do", method = RequestMethod.POST)

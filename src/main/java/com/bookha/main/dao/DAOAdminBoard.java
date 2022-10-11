@@ -111,9 +111,28 @@ public class DAOAdminBoard implements MapperAdmin {
 		// TODO Auto-generated method stub
 		return mapper.nolist(to);
 	}
-
-	// chart
 	
+
+	@Override
+	public ArrayList<DTOAdminBoard> memberList(DTOAdminTotal dto) {
+		// TODO Auto-generated method stub
+		return mapper.memberList(dto);
+	}
+
+	@Override
+	public int countMember() {
+		// TODO Auto-generated method stub
+		return mapper.countMember();
+	}
+
+	@Override
+	public int memberDelete(int uesr_num) {
+		// TODO Auto-generated method stub
+		return mapper.memberDelete(uesr_num); 
+	}
+
+	
+	// chart	
 	@Override
 	public ArrayList<DTOAttendance> countDaily(DTOAttendance cto) {
 		// TODO Auto-generated method stub

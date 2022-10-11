@@ -14,7 +14,7 @@ import com.bookha.main.dto.DTOAttendance;
 public interface MapperAdmin {
 	
 	ArrayList<DTOAdminBoard> list(DTOAdminTotal dto);
-	
+
 	int countBoard();
 	
 	DTOAdminBoard view(int seq);
@@ -32,6 +32,12 @@ public interface MapperAdmin {
 	int deleteOk(DTOAdminBoard to);
 	
 	ArrayList<DTOAdminBoard> nolist(DTOAdminBoard to);
+	
+	ArrayList<DTOAdminBoard> memberList(DTOAdminTotal dto);
+	
+	int countMember();
+	
+	int memberDelete(int user_num);
 	
 	// chart
 	ArrayList<DTOAttendance> countDaily(DTOAttendance cto);
