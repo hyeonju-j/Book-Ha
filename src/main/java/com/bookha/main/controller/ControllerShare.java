@@ -314,9 +314,8 @@ public class ControllerShare {
 		DTOShareBoard to = dao.view(seq);
 		mv.addObject("to", to);
 		
-		//상단 Navbar Model
 		DTOUser userSetting = new DTOUser();
-		userSetting = daoUser.userSetting(session_user_num);
+		userSetting = daoUser.userSetting(to.getUser_num());
 		mv.addObject("user", userSetting);
 		
 		//좌측 Menu Model
@@ -324,6 +323,7 @@ public class ControllerShare {
 		String menuBar = menuModel.menuBar("share");
 		mv.addObject("menuBar", menuBar);
 		
+		//상단 Navbar Model
 		ModelNavBar navModel = new ModelNavBar();
 		String navBar = navModel.navBar(userSetting);
 		mv.addObject("navBar", navBar);

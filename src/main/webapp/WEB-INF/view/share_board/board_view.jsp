@@ -32,10 +32,6 @@
 	String date = to.getWdate();
 	int hit = to.getHit();
 	
-	String myprofile = "../assets/img/achievements/" + user.getUser_profile();
-	String self = user.getUser_self();
-	String nickname = to.getUser_nickname();
-	
 	String btnradio1 = "disabled";
 	String btnradio2 = "disabled";
 	String btnradio3 = "disabled";
@@ -395,12 +391,12 @@
 								<label class='list-group-item'>
 									<div class='d-grid d-sm-flex p-3'>
 										<img
-											src='<%=myprofile %>'
+											src='../assets/img/achievements/<%= user.getUser_profile() %>'
 											style='width: 120px'
-											class='me-4 mb-sm-0 mb-2 h-auto rounded-circle' /> <span>
-											<h6 style="color: #696CFF"><%=nickname %></h6>
-											<div><%=self %></div>
-											<div></div>
+											class='me-4 mb-sm-0 mb-2 h-auto rounded-circle' />
+										<span>
+											<h6 style="color: #696CFF"><%= user.getUser_nickname() %></h6>
+											<div><%= user.getUser_self() %></div>
 										</span>
 									</div>
 								</label>
