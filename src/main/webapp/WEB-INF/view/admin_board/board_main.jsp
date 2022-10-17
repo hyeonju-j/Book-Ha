@@ -136,7 +136,11 @@
 					} else {
 						xList.push(data[i].date.substring(8));
 					}
-					dataList.push(data[i].cnt-1);
+					if( data[i].cnt == null ){
+						dataList.push(0);
+					} else {
+						dataList.push(data[i].cnt-1);
+					}
 				}
 				
 				let today = data[data.length-1].date + " " + day_array[day];
@@ -157,6 +161,9 @@
 					options : {
 						legend : {
 							display : false
+						},
+						hover: {
+							animationDuration: 0
 						},
 						scales: {
 							yAxes: [{
@@ -207,7 +214,11 @@
 					}
 					
 					check = data[i].start.substring(5,7);
-					dataList.push(data[i].cnt-1);
+					if( data[i].cnt == null ){
+						dataList.push(0);
+					} else {
+						dataList.push(data[i].cnt-1);
+					}
 				}
 				
 				let startday = data[data.length - 1].start;
@@ -261,7 +272,11 @@
 				for( let i=0; i<data.length; i++ ) {
 					xList.push(data[i].date.substring(5));
 					
-					dataList.push(data[i].cnt-1);
+					if( data[i].cnt == null ){
+						dataList.push(0);
+					} else {
+						dataList.push(data[i].cnt-1);
+					}
 					//console.log(data[i].cnt-1);
 				}
 				
