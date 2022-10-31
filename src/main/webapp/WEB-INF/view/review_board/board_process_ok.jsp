@@ -3,7 +3,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	
-	//String result = (String)request.getAttribute("result");
 	int flag = (Integer)request.getAttribute("flag");
 	
 	String result = "";

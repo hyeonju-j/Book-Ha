@@ -212,8 +212,7 @@
 
 	            })
 	            .done(function (msg) {
-	                //console.log(msg);
-	                
+	            	
 	                book_total_search_count = msg.meta.is_end;
 	                
 				let search_count = 5;
@@ -382,7 +381,7 @@
 		    previewHighlight: false,
 		    height: '700px',
 		    // 사전입력 항목
-		    //placeholder: 'Please enter text. 3333333333333333333333333333333333333333',
+		    //placeholder: 'Please enter text.',
 		    // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
 		    hooks: {
 		    	addImageBlobHook: (blob, callback) => {
@@ -404,7 +403,7 @@
 		           		cache: false,
 		           		timeout: 600000,
 		           		success: function(data) {
-		           			//console.log('ajax 이미지 업로드 성공');
+
 		           			url += data.filename;
 		           			
 		           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
@@ -412,8 +411,6 @@
 		           			callback(url, '사진 대체 텍스트 입력');
 		           		},
 		           		error: function(e) {
-		           			//console.log('ajax 이미지 업로드 실패');
-		           			//console.log(e.abort([statusText]));
 		           			toastr.error('이미지 업로드에 실패하였습니다.', '실패!');
 		           			callback('image_load_fail', '사진 대체 텍스트 입력');
 		           		}

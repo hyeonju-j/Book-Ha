@@ -40,8 +40,6 @@ public class DAOUser {
 		user.setUser_mail(user.getUser_mail());
 		user.setUser_password(user.getUser_password());
 		
-//		System.out.println(user.toString());
-		
 		List<Map<String, String>> mapLists = mapper_User.userSignIn(user);
 		
 		Map<String, String> map = mapLists.get(0);

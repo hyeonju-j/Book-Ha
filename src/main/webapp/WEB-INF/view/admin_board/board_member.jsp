@@ -105,7 +105,6 @@
 					$('#modalCenter2').modal('hide');
 					toastr.success('회원이 삭제되었습니다.', '성공!');
 					window.location.href = "/memberList.do";
-					//reload();
 				}
 			});
 		});

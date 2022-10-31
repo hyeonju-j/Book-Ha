@@ -130,9 +130,6 @@
 			const formData = new FormData(); //가상의 form생성(js내부에서 돌아가는 form 객체)
 	    	formData.append('image', $('#formFile')[0].files[0]);
 	    	
-	    	//console.log($('#formFile')[0].files[0]);
-	    	//console.log(formData);
-			
 	    	let url = '/images/';
 			$.ajax({
 	       		type: 'POST',
@@ -145,16 +142,14 @@
 	       		cache: false,
 	       		timeout: 600000,
 	       		success: function(data) {
-	       			//console.log('ajax 이미지 업로드 성공');
 	       			url += data.filename;
-	       			//console.log(url);
 	       			
 	       			let DTO_Album_board = {
 	       					"al_user_num" : <%=session_user_num%>,
 	       					"al_subject" : $("#writeSubject").val(),
 	       					"al_imgName" : data.filename
 	       			}
-	       			//console.log(DTO_Album_board);
+
 	       			$.ajax({
 	       				type: "POST",
 	       				url: "album_write.do",
@@ -163,12 +158,11 @@
 	       				dataType: "text",
 	       				success: function(data){
 	       					$("#modalCenter0").modal("hide");
-	       					//console.log("DB 추가 성공");
 	       					reload();
 	       					toastr.success('게시글이 작성되었습니다.', '성공!');
 	       				},
 	       				error: function(error) {
-	       					//console.log("error : " + error);
+	       					
 	       				}
 	       			});
 	       		}

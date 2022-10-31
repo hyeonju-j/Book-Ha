@@ -277,7 +277,7 @@
 					} else {
 						dataList.push(data[i].cnt-1);
 					}
-					//console.log(data[i].cnt-1);
+
 				}
 				
 				let today = data[data.length - 1].date;

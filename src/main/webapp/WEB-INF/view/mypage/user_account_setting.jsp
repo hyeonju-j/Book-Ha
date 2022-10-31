@@ -169,7 +169,7 @@
 	    				}
 	    			},
 	    			error : function(){
-	    				//console.log("서버요청실패");
+
 	    			}
 	    		});
     		}

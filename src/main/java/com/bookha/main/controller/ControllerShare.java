@@ -274,7 +274,7 @@ public class ControllerShare {
 		//mv.addObject("msg", "get");
 
 		String subject = request.getParameter("subject");
-		// user_num jsp에서 필요할 때 가져오는 방법
+		// user_num : jsp에서 필요할 때
 		int user_num = Integer.parseInt(request.getParameter("user_num"));
 		String content = request.getParameter("content");
 		String hash_tag = request.getParameter("hash_tag");
@@ -306,7 +306,7 @@ public class ControllerShare {
 		
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		
-		//controller에서 필요할 때 세션에서 가져오기
+		// user_num : controller에서 필요할 때 (세션에서 가져오기)
 		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
 		mv.addObject("session_user_num", session_user_num);
 		

@@ -62,7 +62,6 @@ public class ControllerLogin {
 		session.setAttribute("login", true);
 		
 		DTOUser to = daoUser.signIn(user);
-		//System.out.println(to.getUser_num());
 		session.setAttribute("user_num", to.getUser_num());
 		
 		// 세션 유지시간 무제한

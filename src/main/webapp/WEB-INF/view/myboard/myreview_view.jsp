@@ -212,8 +212,6 @@ $(document).ready(function() {
 			"board_seq": <%= seq %>
 		}
 		
-		//console.log(DTO_Review_Comment);
-		
 		$.ajax({
 			type: 'POST',
 			url: "/review_comment_write.do",
@@ -223,7 +221,6 @@ $(document).ready(function() {
 			success: function(data) {
 				$("#reply-text-area").val('');
 				toastr.success('댓글이 작성되었습니다.', '성공!');
-//					console.log(data);
 				reload(<%= seq %>);
 			}
 		});
@@ -240,9 +237,6 @@ $(document).ready(function() {
 			"user_num": <%= session_user_num %>
 		}
 		
-//			console.log(com_seq);
-//			console.log(DTO_Review_Comment);
-		
 		$.ajax({
 			type: 'POST',
 			url: "/review_comment_delete.do",
@@ -251,7 +245,6 @@ $(document).ready(function() {
 			dataType: "text",
 			success: function(data) {
 				toastr.success('댓글이 삭제되었습니다.', '성공!');
-//					console.log(data);
 				reload(<%= seq %>);
 			}
 		});
@@ -264,12 +257,10 @@ $(document).ready(function() {
 	});
 	
 	$('#boardDeleteBtn').on('click', function() {
-		//console.log('삭제모달창 소환!');
 		//toastr.success('삭제 모달창 생성!', '성공');
 	});
 	
 	$('#boardDeleteOkBtn').on('click', function() {
-		//console.log('삭제버튼 누름!');
 		//toastr.success('삭제 버튼 누름!', '성공');
 		
 		let f = document.createElement('form');
@@ -297,7 +288,7 @@ $(document).ready(function() {
 });
 
 const reload = function(board_seq) {
-//		console.log("board seq : " + board_seq);
+
 	$.ajax({
 		type: 'POST',
 		url: "/review_comment_list.do",
@@ -307,8 +298,6 @@ const reload = function(board_seq) {
 		contentType: "application/json; charset=UTF-8",
 		dataType: "text",
 		success: function(data) {
-//				toastr.success('댓글 목록을 불러왔습니다.', '성공');
-//				console.log(data);
 			$('#reply').html(data);
 		}
 	});
@@ -451,21 +440,8 @@ const reload = function(board_seq) {
 							</script>
 
 							<div class="list-group" id="reply">
-<!-- 								<label class='list-group-item'> -->
-<!-- 									<h6 style="color: #696CFF; display: inline-block;">작성자1234</h6> -->
-<!-- 									&emsp;&emsp; -->
-<!-- 									<a href="#" class="deleteReply" style="color: gray; display: inline-block;">댓글 삭제</a> -->
-<!-- 									<div style="display: inline-block; visibility: hidden;">댓글seq1</div> -->
-<!-- 									<p>댓글내용입니다 댓글내용입니다 댓글내용입니다 댓글내용입니다 댓글내용입니다 댓글내용입니다 댓글내용입니다</p> -->
-<!-- 								</label> -->
 								<%= comment %>
 							</div>
-							
-							<script type="text/javascript">
-								$(document).ready(function() {
-									
-								});
-							</script>
 						</div>
 						<!-- / Content -->
 

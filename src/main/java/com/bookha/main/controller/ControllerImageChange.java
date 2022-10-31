@@ -32,8 +32,6 @@ public class ControllerImageChange {
 			long size = multi.getSize();
 			ModelFileSaveName Model_FileSaveName = new ModelFileSaveName();
 			String saveFileName = Model_FileSaveName.GenSaveFileName(extName);
-
-			//System.out.println("saveFileName : " + saveFileName);
 			
 			File folder = new File(path);
 			if(!folder.exists()) {
@@ -51,7 +49,6 @@ public class ControllerImageChange {
 				mv.addObject("filename", saveFileName);
 				mv.addObject("uploadPath", file.getAbsolutePath());
 				mv.addObject("url", uploadPath + saveFileName);
-				//System.out.println("url : " + uploadPath + saveFileName);
 
 				mv.setViewName("image_Url_Json");
 			} else {

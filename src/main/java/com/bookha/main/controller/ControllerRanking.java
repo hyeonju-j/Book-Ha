@@ -70,31 +70,26 @@ public class ControllerRanking {
 		//attendance ranking 1-3 순위 리스트
 		ArrayList<DTOUser> userLists1 = new ArrayList<DTOUser>();
 		for( DTOAttendance list : atLists ) {
-			//System.out.println(list.getUser_num());
 			userLists1.add(dao.getProfile(list.getAt_num()));
 		}
 		//review ranking 1-3 순위 리스트
 		ArrayList<DTOUser> userLists2 = new ArrayList<DTOUser>();
 		for( DTOReviewBoard list : reviewLists ) {
-			//System.out.println(list.getUser_num());
 			userLists2.add(dao.getProfile(list.getUser_num()));
 		}
 		
 		//album ranking 1-3 순위 리스트
 		ArrayList<DTOUser> userLists3 = new ArrayList<DTOUser>();
 		for( DTOAlbumBoard list : albumLists ) {
-			//System.out.println(list.getAl_user_num());
 			userLists3.add(dao.getProfile(list.getAl_user_num()));
 		}
 		
 		//share ranking 1-3 순위 리스트
 		ArrayList<DTOUser> userLists4 = new ArrayList<DTOUser>();
 		for( DTOShareBoard list : shareLists ) {
-			//System.out.println(list.getUser_num());
 			userLists4.add(dao.getProfile(list.getUser_num()));
 		}
 		
-		//System.out.println("유저리스트 : " + userLists1.toString());
 		
 		ModelRanking model = new ModelRanking();
 		String atList = model.getRankingList("부카의 출석왕", userLists1);

@@ -221,7 +221,6 @@ request.setCharacterEncoding("UTF-8");
 			 	//console.log("현재 페이지가 마지막 페이지인지? : "+msg.meta.is_end);
 			 	
 				book_search_is_end = msg.meta.is_end;
-	// 			console.log(book_search_is_end);
 				
 				let search_count = 5;
 				
@@ -276,7 +275,6 @@ request.setCharacterEncoding("UTF-8");
 
 	            })
 	            .done(function (msg) {
-	                //console.log(msg);
 	                
 	                book_total_search_count = msg.meta.is_end;
 	                book_search_is_end = msg.meta.is_end;
@@ -483,7 +481,6 @@ request.setCharacterEncoding("UTF-8");
 		           		cache: false,
 		           		timeout: 600000,
 		           		success: function(data) {
-		           			//console.log('ajax 이미지 업로드 성공');
 		           			url += data.filename;
 		           			
 		           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
@@ -491,7 +488,6 @@ request.setCharacterEncoding("UTF-8");
 		           			callback(url, '사진 대체 텍스트 입력');
 		           		},
 		           		error: function(e) {
-		           			//console.log('ajax 이미지 업로드 실패');
 		           			//console.log(e.abort([statusText]));
 		           			
 		           			callback('image_load_fail', '사진 대체 텍스트 입력');

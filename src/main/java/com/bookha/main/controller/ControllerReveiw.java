@@ -301,7 +301,6 @@ public class ControllerReveiw {
 		ArrayList<DTOReviewComment> com_lists = dao.commentList(seq);
 		ModelReviewCommentList comment = new ModelReviewCommentList();
 		String commentHtml = comment.getCommentList(com_lists, session_user_num, this.user_role);
-		//System.out.println(commentHtml);
 		mv.addObject("comment", commentHtml);
 		
 		mv.setViewName("review_board/board_view");

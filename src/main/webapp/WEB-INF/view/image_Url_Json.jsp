@@ -6,7 +6,6 @@
 
 	String url = (String)request.getAttribute("url");
 	String filename = (String)request.getAttribute("filename");
-	//System.out.println("viewImage.jsp : " + url);
 	
 	StringBuilder sbHtml = new StringBuilder();
 	
