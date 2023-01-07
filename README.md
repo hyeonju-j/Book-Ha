@@ -39,6 +39,12 @@
 			목적에 따라 해스태그로 분류
 			게시글 CURD & 댓글 CRD
 			게시글 검색 기능
+		notice board
+			(user)
+			게시판 상단에 고정 노출 ( 고정 게시글 + 최신 게시글 총 5개 )
+			게시글 읽기만 가능
+			(admin)	
+			게시글 작성 및 수정, 삭제
 <br />
 
 ### Environment
@@ -50,7 +56,7 @@
 <br />
 
 ### Team
-- hyeonju-j : admin page, mypage, share board
-- jiaezzang : main, mypage, ranking, achievement
+- hyeonju-j : admin page, mypage, share board, notice board
+- jiaezzang : main, mypage, ranking, achievement board
 - YoonSeok-Bae : Login/Join, review board
 - ~~91410 9149 : Login/Join~~
