@@ -120,9 +120,9 @@ public class DAOAdminBoard implements MapperAdmin {
 	}
 
 	@Override
-	public int countMember() {
+	public int countMember(DTOAdminTotal dto) {
 		// TODO Auto-generated method stub
-		return mapper.countMember();
+		return mapper.countMember(dto);
 	}
 
 	@Override

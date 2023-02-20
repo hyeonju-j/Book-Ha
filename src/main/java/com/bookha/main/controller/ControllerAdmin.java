@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -428,8 +429,15 @@ public class ControllerAdmin {
 		ModelLogoHtml logo = new ModelLogoHtml();
 		mv.addObject("logo", logo.getLogo().toString());
 		
+		// 검색
+		String searchName = "";
+		if(request.getParameter("searchName") != null) {
+			searchName = request.getParameter("searchName");
+		}
+		
 		// 페이지
 		DTOAdminTotal dto = new DTOAdminTotal();
+		dto.setSearchName(searchName);
 		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
 		
 		// 현재 페이지
@@ -444,7 +452,7 @@ public class ControllerAdmin {
 		dto.setSkip(skip);
 				
 		// 총 게시글 수
-		dto.setTotalRecord(dao.countMember());
+		dto.setTotalRecord(dao.countMember(dto));
 		totalRecord = dto.getTotalRecord();
 		
 		// 전체 페이지 수
@@ -471,17 +479,17 @@ public class ControllerAdmin {
 		String memberList = ad.memberList(memberLists);
 		mv.addObject("memberList", memberList);
 		
-		// 페이지
+		// pageNav
 		ModelAdminPageNavigation pageModel = new ModelAdminPageNavigation();
 		String paging = pageModel.getmPage(dto);
 		mv.addObject("paging", paging);
 
-		//Navbar Model
+		// Navbar Model
 		DTOUser userSetting = new DTOUser();
 		int session_user_num = Integer.parseInt(String.valueOf(session.getAttribute("user_num")));
 		userSetting = daoUser.userSetting(session_user_num);
 		ModelNavBar navModel = new ModelNavBar();
-		String navBar = navModel.navBar(userSetting);
+		String navBar = navModel.navBarSearchN(userSetting);
 		mv.addObject("navBar", navBar);
 		
 		//좌측 Menu Model
@@ -491,6 +499,64 @@ public class ControllerAdmin {
 		
 		mv.setViewName("admin_board/board_member");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/member_list_search.do", method = RequestMethod.POST)
+	public String listSearch(@RequestBody DTOAdminTotal to, HttpServletRequest request) {
+		ArrayList<DTOAdminBoard> memberLists = new ArrayList<DTOAdminBoard>();
+		
+		String searchName = to.getSearchName();
+		
+		// 페이지
+		DTOAdminTotal dto = new DTOAdminTotal();
+		dto.setSearchName(searchName);
+		int skip, cpage;
+		
+		cpage = dto.getCpage();
+		skip = (cpage - 1) * dto.getRecordPerPage();
+		dto.setSkip(skip);
+		
+		memberLists = dao.memberList(dto);
+		
+		ModelAdminList ad = new ModelAdminList();
+		String memberList = ad.memberList(memberLists);
+		
+		return memberList;
+	}
+	
+	@RequestMapping(value = "/member_list_pageNav.do", method = RequestMethod.POST)
+	public String listpageNav(@RequestBody DTOAdminTotal to, HttpServletRequest request) {
+		
+		String sarchName = to.getSearchName();
+		
+		DTOAdminTotal dto = new DTOAdminTotal();
+		dto.setSearchName(sarchName);
+		int skip, cpage, blockPerPage, totalPage, totalRecord, startBlock, endBlock;
+		
+		cpage = dto.getCpage();
+		skip = (cpage - 1) * dto.getRecordPerPage();
+		dto.setSkip(skip);
+		
+		dto.setTotalRecord(dao.countMember(dto));
+		totalRecord = dto.getTotalRecord();
+		
+		totalPage = ( (totalRecord - 1) / dto.getRecordPerPage() ) + 1;
+		dto.setTotalPage(totalPage);
+		
+		blockPerPage = dto.getBlockPerPage();
+		
+		startBlock = (( (cpage - 1) / blockPerPage ) * blockPerPage) + 1;
+		dto.setStartBlock(startBlock);
+		endBlock = (( (cpage - 1) / blockPerPage ) * blockPerPage) + blockPerPage;
+		if(endBlock >= totalPage) {
+			endBlock = totalPage;
+		}
+		dto.setEndBlock(endBlock);
+		
+		ModelAdminPageNavigation pageModel = new ModelAdminPageNavigation();
+		String paging = pageModel.getmPage(dto);
+		
+		return paging;
 	}
 	
 	@RequestMapping(value = "/member_delete.do", method = RequestMethod.POST)

@@ -18,6 +18,8 @@ public class DTOAdminTotal {
 	
 	private int skip;
 	
+	private String searchName;
+	
 	private ArrayList<DTOAdminBoard> board;
 	
 	public DTOAdminTotal() {
@@ -27,5 +29,7 @@ public class DTOAdminTotal {
 		this.blockPerPage = 5;
 		this.totalPage = 1;
 		this.totalRecord = 0;
+		
+		this.searchName = "";
 	}
 }

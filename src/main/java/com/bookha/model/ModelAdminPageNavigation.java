@@ -68,6 +68,7 @@ public class ModelAdminPageNavigation {
 	
 	public String getmPage(DTOAdminTotal dto) {
 		String model = "";
+		String searchName = dto.getSearchName();
 		
 		// 네비게이션 시작태그
 		model += "<nav aria-label='Page navigation'>";
@@ -76,12 +77,14 @@ public class ModelAdminPageNavigation {
 		// 네비게이션 이전페이지 화살표
 		model += "<li class='page-item first'>";
 		model += "<a class='page-link' href='/memberList.do?cpage=1";
+		model += "&searchName=" + searchName;
 		model += "'>";
 		model += "<i class='tf-icon bx bx-chevrons-left'></i></a></li>";
 		model += "<li class='page-item prev'>";
 		if(dto.getStartBlock() != 1) {
 			model += "<a class='page-link' href='/memberList.do";
 			model += "?cpage=" + (dto.getStartBlock() - 5);
+			model += "&searchName=" + searchName;
 			model += "'>";
 		} else {
 			model += "<a class='page-link' href='javascript:void(0);";
@@ -89,7 +92,7 @@ public class ModelAdminPageNavigation {
 		}
 		model += "<i class='tf-icon bx bx-chevron-left'></i></a></li>";
 		
-		// 네비게이션 번호
+		// 페이지 번호
 		for(int i=dto.getStartBlock(); i<=dto.getEndBlock(); i++) {
 			model += "<li class='page-item ";
 			if(dto.getCpage() == i) {
@@ -98,6 +101,7 @@ public class ModelAdminPageNavigation {
 			model += "'>";
 			model += "<a class='page-link' href='/memberList.do";
 			model += "?cpage=" + i;
+			model += "&searchName=" + searchName;
 			model += "'>" + i + "</a></li>";
 		}
 		
@@ -106,6 +110,7 @@ public class ModelAdminPageNavigation {
 		if(dto.getTotalPage() != dto.getEndBlock()) {
 			model += "<a class='page-link' href='/memberList.do";
 			model += "?cpage=" + (dto.getEndBlock() + 1);
+			model += "&searchName=" + searchName;
 			model += "'>";
 		} else {
 			model += "<a class='page-link' href='javascript:void(0);";
@@ -115,6 +120,7 @@ public class ModelAdminPageNavigation {
 		model += "<li class='page-item last'>";
 		model += "<a class='page-link' href='/memberList.do";
 		model += "?cpage=" + dto.getTotalPage();
+		model += "&searchName=" + searchName ;
 		model += "'>";
 		model += "<i class='tf-icon bx bx-chevrons-right'></i></a></li>";
 		

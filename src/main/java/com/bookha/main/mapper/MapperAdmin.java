@@ -35,7 +35,7 @@ public interface MapperAdmin {
 	
 	ArrayList<DTOAdminBoard> memberList(DTOAdminTotal dto);
 	
-	int countMember();
+	int countMember(DTOAdminTotal dto);
 	
 	int memberDelete(int user_num);
 	

@@ -118,6 +118,7 @@ public class ControllerShare {
 		}
 		dto.setEndBlock(endBlock);
 		
+		// list
 		ArrayList<DTOShareBoard> lists = new ArrayList<DTOShareBoard>();
 		lists = dao.list(dto);		
 		
@@ -125,6 +126,7 @@ public class ControllerShare {
 		String listTable = sh.ShareList(lists);
 		mv.addObject("listTable", listTable);
 		
+		// pageNav
 		ModelSharePageNavigation pageModel = new ModelSharePageNavigation();
 		String paging = pageModel.getPageNav(dto);
 		mv.addObject("paging", paging);

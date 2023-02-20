@@ -82,7 +82,71 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="../js/toastr.js"></script>
 
-<script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$(document).on('keyup', '#searchName', function() {
+			if(true) {
+				let searchName = $('#searchName').val();
+				
+				let DTOAdminTotal = {
+						"searchName": searchName
+				}
+				
+				$.ajax({
+					type: "POST",
+					url: "/member_list_search.do",
+					data: JSON.stringify(DTOAdminTotal),
+					contentType: "application/json; charset=UTF-8",
+					dataType: "text",
+					success: function(data) {
+						$('#memberList').html(data);
+						pageNavigation(searchName);
+					}
+				});
+			}
+			
+			else {
+				let searchName = "";
+				
+				let DTOAdminTotal = {
+						"searchName": searchName
+				}
+				
+				$.ajax({
+					type: "POST",
+					url: "/member_list_search.do",
+					data: JSON.stringify(DTOAdminTotal),
+					contentType: "application/json; charset=UTF-8",
+					dataType: "text",
+					success: function(data) {
+						$('#memberList').html(data);
+						$('#searchName').val('');
+						pageNavigation(searchName);
+					}
+				});
+			}
+		});
+		
+	});
+	
+	const pageNavigation = function(searchName) {
+		let DTOAdminTotal = {
+				"searchName": searchName
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/member_list_pageNav.do",
+			data: JSON.stringify(DTOAdminTotal),
+			contentType: "application/json; charset=UTF-8",
+			dataType: "text",
+			success: funtion(data) {
+				$('#pageNav').html(data);
+			}
+		});
+	}
+
 	let data = 0;
 	const deleteData = function(user_num){
 		data = user_num;
@@ -168,7 +232,7 @@
 											<th>삭  제</th>
 										</tr>
 									</thead>
-									<tbody class="table-border-bottom-0" id="memberContents">
+									<tbody class="table-border-bottom-0" id="memberList">
 										<!-- 리스트 -->
 										<%=memberList %>
 										<!-- /리스트 -->
@@ -176,7 +240,7 @@
 								</table>
 							</div>
 							<br /><br />
-							<div class="demo-inline-spacing" style="display:flex; justify-content: center;">
+							<div id="pageNav" class="demo-inline-spacing">
 								<!-- Basic Pagination -->
 								<%=paging %>
 								<!--/ Basic Pagination -->

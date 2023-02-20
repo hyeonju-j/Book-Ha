@@ -22,10 +22,8 @@
 				row_number() over(	
 								ORDER BY
 									(case
-										when no_subject like '%리뷰%' then 1 
-										when no_subject like '%챌린지%' then 2
-										when no_subject like '%공유%' then 3
-										else 4 end),
+										when no_subject like '%반드시%' then 1 
+										else 2 end),
 										no_seq desc
 						      		) rowno
    			FROM
@@ -66,10 +64,8 @@
 				row_number() over(	
 								ORDER BY
 									(case
-										when no_subject like '%리뷰%' then 1 
-										when no_subject like '%챌린지%' then 2
-										when no_subject like '%공유%' then 3
-										else 4 end),
+										when no_subject like '%반드시%' then 1 
+										else 2 end),
 										no_seq desc
 						      		) rowno
    			FROM
@@ -91,10 +87,8 @@
 				row_number() over(	
 								ORDER BY
 									(case
-										when no_subject like '%리뷰%' then 1 
-										when no_subject like '%챌린지%' then 2
-										when no_subject like '%공유%' then 3
-										else 4 end),
+										when no_subject like '%반드시%' then 1 
+										else 2 end),
 										no_seq desc
 						      		) rowno
    			FROM
@@ -116,10 +110,8 @@
 				row_number() over(	
 								ORDER BY
 									(case
-										when no_subject like '%리뷰%' then 1 
-										when no_subject like '%챌린지%' then 2
-										when no_subject like '%공유%' then 3
-										else 4 end),
+										when no_subject like '%반드시%' then 1 
+										else 2 end),
 										no_seq desc
 						      		) rowno
    			FROM
@@ -194,10 +186,8 @@
 				row_number() over(	
 								ORDER BY
 									(case
-										when no_subject like '%리뷰%' then 1 
-										when no_subject like '%챌린지%' then 2
-										when no_subject like '%공유%' then 3
-										else 4 end),
+										when no_subject like '%반드시%' then 1 
+										else 2 end),
 										no_seq desc
 						      		) rowno
    			FROM
@@ -282,11 +272,15 @@
 			user_role
 		NOT IN
 			('admin')
+		AND
+			user_nickname like CONCAT('%', #{searchName}, '%')
 		ORDER BY
 			rowno desc
+		LIMIT
+        	#{skip}, #{recordPerPage}
     </select>
     
-    <select id="countMember" resultType="int">
+    <select id="countMember" parameterType="com.bookha.main.dto.DTOAdminTotal" resultType="int">
     	SELECT
     		count(*)
     	FROM
@@ -295,6 +289,8 @@
     		user_role
     	NOT IN
     		('admin')
+    	AND
+			user_nickname like CONCAT('%', #{searchName}, '%')
     </select>
     
     <delete id="memberDelete" parameterType="int">
