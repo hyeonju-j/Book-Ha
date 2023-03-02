@@ -1,31 +1,23 @@
 package com.bookha.main.controller;
 
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.bookha.main.dao.DAOAdminBoard;
 import com.bookha.main.dao.DAOUser;
 import com.bookha.main.dto.DTOAdminBoard;
 import com.bookha.main.dto.DTOAdminTotal;
 import com.bookha.main.dto.DTOAttendance;
 import com.bookha.main.dto.DTOUser;
-import com.bookha.model.ModelAdminList;
-import com.bookha.model.ModelAdminPageNavigation;
-import com.bookha.model.ModelLogoHtml;
-import com.bookha.model.ModelMenuBar;
-import com.bookha.model.ModelNavBar;
-import com.bookha.model.ModelProfileHtml;
+import com.bookha.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @RestController
 public class ControllerAdmin {
