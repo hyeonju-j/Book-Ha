@@ -5,6 +5,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'application'
 }
 
 repositories {
@@ -53,6 +54,10 @@ tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
 }
 
-jar {
+jar{
+    archivesBaseName = 'Book-Ha'
+    archiveFileName = 'Book-Ha.jar'
+    archiveVersion = "0.0.0"
     enabled = false
 }
+
