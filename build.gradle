@@ -54,7 +54,5 @@ tasks.withType(Javadoc) {
 }
 
 jar {
-    manifest {
-        attributes 'Main-Class': 'com.package.application.MainClass'
-    }
+    enabled = false
 }
