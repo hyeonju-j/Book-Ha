@@ -56,9 +56,6 @@ tasks.withType(Javadoc) {
 }
 
 jar {
-    archivesBaseName = 'Book-Ha'
-    archiveFileName = 'Book-Ha.jar'
-    archiveVersion = "0.0.0"
     enabled = false
 }
 
