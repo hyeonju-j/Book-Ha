@@ -9,6 +9,8 @@ plugins {
     id 'application'
 }
 
+mainClassName = 'com.bookha.main.BookHaApplication'
+
 repositories {
     mavenLocal()
     maven {
