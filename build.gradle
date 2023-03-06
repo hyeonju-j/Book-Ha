@@ -58,6 +58,8 @@ tasks.withType(Javadoc) {
 }
 
 jar {
-    enabled = false
+    manifest {
+        attributes 'Main-Class': 'com.bookha.main.BookHaApplication'
+    }
 }
 
